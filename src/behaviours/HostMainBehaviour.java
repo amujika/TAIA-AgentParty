@@ -1,23 +1,20 @@
 package behaviours;
 
+import jade.core.behaviours.TickerBehaviour;
+import utils.Constants;
 import agents.Host;
-import jade.core.behaviours.CyclicBehaviour;
 
-public class HostMainBehaviour extends CyclicBehaviour{
-
+public class HostMainBehaviour extends TickerBehaviour{
 	private static final long serialVersionUID = -219939034710645230L;
 
-	private int i = 0;
 	private Host myAgent;
 	
 	public HostMainBehaviour(Host agent) {
-		super(agent);
+		super(agent, Constants.REFRESH_TIME);
 		myAgent = agent;
 	}
 	
-	public void action() {		
-		myAgent.image.setLocation(i/100000, i/100000);
-		i++;		
+	protected void onTick() {
+		myAgent.move(1, 1);		
 	}
-
 }

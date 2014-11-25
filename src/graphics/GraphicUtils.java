@@ -3,6 +3,8 @@ package graphics;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import utils.Constants;
+
 public class GraphicUtils {
 
 	static JFrame window;
@@ -10,7 +12,7 @@ public class GraphicUtils {
 	public static void initialize() {
 		window = new JFrame();
 		window.setLayout(null);
-		window.setSize(1000, 700);
+		window.setSize(Constants.WINDOW_HEIGHT, Constants.WINDOW_WIDTH);
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 	}
