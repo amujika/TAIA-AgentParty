@@ -1,4 +1,4 @@
-package behaviours;
+package behaviours.host;
 
 import jade.core.behaviours.TickerBehaviour;
 import utils.Constants;

@@ -7,8 +7,8 @@ import utils.Constants;
 import utils.DFServiceUtils;
 import utils.Resources;
 import graphics.GraphicUtils;
-import behaviours.HostCreatorBehaviour;
-import behaviours.HostMoveBehaviour;
+import behaviours.host.HostCreatorBehaviour;
+import behaviours.host.HostMoveBehaviour;
 import jade.core.Agent;
 
 public class Host extends Agent {	

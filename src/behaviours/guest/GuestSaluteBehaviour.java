@@ -1,4 +1,4 @@
-package behaviours;
+package behaviours.guest;
 
 import java.util.TreeMap;
 

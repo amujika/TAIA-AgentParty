@@ -2,7 +2,7 @@ package agents;
 
 import java.util.TreeMap;
 
-import behaviours.GuestSaluteBehaviour;
+import behaviours.guest.GuestSaluteBehaviour;
 import utils.Resources;
 
 public class Banana extends Guest{

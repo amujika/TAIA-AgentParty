@@ -8,8 +8,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import behaviours.GuestMoveBehaviour;
-import behaviours.GuestSaluteBehaviour;
+import behaviours.guest.GuestMoveBehaviour;
+import behaviours.guest.GuestSaluteBehaviour;
 import utils.Constants;
 import utils.DFServiceUtils;
 

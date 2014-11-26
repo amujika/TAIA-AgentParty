@@ -1,4 +1,4 @@
-package behaviours;
+package behaviours.host;
 
 import agents.Banana;
 import jade.core.Agent;
