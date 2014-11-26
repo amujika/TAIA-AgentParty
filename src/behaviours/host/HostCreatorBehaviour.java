@@ -1,10 +1,11 @@
 package behaviours.host;
 
-import agents.Banana;
 import jade.core.Agent;
+import jade.core.behaviours.TickerBehaviour;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.StaleProxyException;
-import jade.core.behaviours.TickerBehaviour;
+import agents.Ateo;
+import agents.Banana;
 
 public class HostCreatorBehaviour extends TickerBehaviour{
 	private static final long serialVersionUID = -1727329283961461036L;
@@ -21,6 +22,13 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 		case 0:
 			try {
 				container.createNewAgent("Banana", Banana.class.getName(), new Object[0]).start();
+			} catch (StaleProxyException e) {				
+				e.printStackTrace();
+			}
+			break;
+		case 1:
+			try {
+				container.createNewAgent("Ateo", Ateo.class.getName(), new Object[0]).start();
 			} catch (StaleProxyException e) {				
 				e.printStackTrace();
 			}
