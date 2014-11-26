@@ -4,12 +4,12 @@ import jade.core.behaviours.TickerBehaviour;
 import utils.Constants;
 import agents.Host;
 
-public class HostMainBehaviour extends TickerBehaviour{
+public class HostMoveBehaviour extends TickerBehaviour{
 	private static final long serialVersionUID = -219939034710645230L;
 
 	private Host myAgent;
 	
-	public HostMainBehaviour(Host agent) {
+	public HostMoveBehaviour(Host agent) {
 		super(agent, Constants.REFRESH_TIME);
 		myAgent = agent;
 	}

@@ -3,10 +3,12 @@ package agents;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import utils.Constants;
+import utils.DFServiceUtils;
 import utils.Resources;
 import graphics.GraphicUtils;
 import behaviours.HostCreatorBehaviour;
-import behaviours.HostMainBehaviour;
+import behaviours.HostMoveBehaviour;
 import jade.core.Agent;
 
 public class Host extends Agent {	
@@ -16,7 +18,7 @@ public class Host extends Agent {
 	protected int x, y;
 	
 	protected void setup() {
-		HostMainBehaviour main_behaviour = new HostMainBehaviour(this);
+		HostMoveBehaviour main_behaviour = new HostMoveBehaviour(this);
 		this.addBehaviour(main_behaviour);
 		HostCreatorBehaviour creator_behaviour = new HostCreatorBehaviour(this);
 		this.addBehaviour(creator_behaviour);
@@ -26,6 +28,11 @@ public class Host extends Agent {
 		GraphicUtils.initialize();
 		setupImage();	
 		this.getContainerController();
+		
+		if (!DFServiceUtils.RegisterService(this, Constants.HOST_SERVICE, this.getLocalName())) {
+			System.err.println(this.getLocalName() + ": Couldn't register agent service. Killing agent...");
+			this.doDelete();
+		}
 	}
 	
 	private void setupImage() {

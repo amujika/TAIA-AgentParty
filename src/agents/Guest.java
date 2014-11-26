@@ -9,21 +9,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import behaviours.GuestMoveBehaviour;
+import behaviours.GuestSaluteBehaviour;
+import utils.Constants;
 import utils.DFServiceUtils;
 
-public class Guest extends Agent{
+public abstract class Guest extends Agent{
 	private static final long serialVersionUID = -261734589169928696L;
 	
 	protected JLabel image;
 	protected int x, y;
 	
+	protected abstract void setSalutes(GuestSaluteBehaviour behaviour);
+	
 	protected void setup() {
-		if (!DFServiceUtils.RegisterService(this, "Guest", this.getLocalName())) {
+		if (!DFServiceUtils.RegisterService(this, Constants.GUEST_SERVICE, this.getLocalName())) {
 			System.err.println(this.getLocalName() + ": Couldn't register agent service. Killing agent...");
 			this.doDelete();
 		}
-		GuestMoveBehaviour main_behaviour = new GuestMoveBehaviour(this);
-		this.addBehaviour(main_behaviour);
+		GuestMoveBehaviour move_behaviour = new GuestMoveBehaviour(this);
+		this.addBehaviour(move_behaviour);
 	}
 	
 	protected void setupImage(String file_name, double size) {
@@ -46,6 +50,7 @@ public class Guest extends Agent{
 		y += delta_y;
 		image.setLocation(x, y);
 	}
+		
 	public int getX() {
 		return x;
 	}
