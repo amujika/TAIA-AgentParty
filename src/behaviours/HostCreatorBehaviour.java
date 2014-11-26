@@ -1,7 +1,6 @@
 package behaviours;
 
 import agents.Banana;
-import agents.Guest;
 import jade.core.Agent;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.StaleProxyException;
@@ -21,7 +20,7 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 		switch (state) {
 		case 0:
 			try {
-				container.createNewAgent("Banana", Banana.class.getName(), new Object[0]).start();;
+				container.createNewAgent("Banana", Banana.class.getName(), new Object[0]).start();
 			} catch (StaleProxyException e) {				
 				e.printStackTrace();
 			}

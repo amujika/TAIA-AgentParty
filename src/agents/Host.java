@@ -13,7 +13,7 @@ public class Host extends Agent {
 	private static final long serialVersionUID = 3493143872944535412L;
 	
 	private JLabel image;
-	private int x, y;
+	protected int x, y;
 	
 	protected void setup() {
 		HostMainBehaviour main_behaviour = new HostMainBehaviour(this);
@@ -40,9 +40,9 @@ public class Host extends Agent {
 		GraphicUtils.addImage(image);
 	}
 	
-	public void move(int delta_x, int delta_y) {
-		x += delta_x;
-		y += delta_y;
+	public void move(int new_x, int new_y) {
+		x = new_x;
+		y = new_y;
 		image.setLocation(x, y);
 	}
 	

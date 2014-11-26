@@ -8,7 +8,7 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 
 public class DFServiceUtils {
 	
-	public static boolean RegisterService(Agent agent, String service_name, String service_type) {
+	public static boolean RegisterService(Agent agent, String service_type, String service_name) {
 		
 		DFAgentDescription agent_description = new DFAgentDescription();
 		agent_description.setName(agent.getAID());

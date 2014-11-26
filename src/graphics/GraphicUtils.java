@@ -12,7 +12,7 @@ public class GraphicUtils {
 	public static void initialize() {
 		window = new JFrame();
 		window.setLayout(null);
-		window.setSize(Constants.WINDOW_HEIGHT, Constants.WINDOW_WIDTH);
+		window.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 	}
