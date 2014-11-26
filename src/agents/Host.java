@@ -3,10 +3,8 @@ package agents;
 import graphics.GraphicUtils;
 import jade.core.Agent;
 
-import java.awt.Color;
 import java.util.TreeMap;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -24,19 +22,16 @@ public class Host extends Agent {
 	protected int x, y;
 	
 	protected void setup() {
-		HostMoveBehaviour main_behaviour = new HostMoveBehaviour(this);
-		this.addBehaviour(main_behaviour);
-		HostCreatorBehaviour creator_behaviour = new HostCreatorBehaviour(this);
-		this.addBehaviour(creator_behaviour);
-		HostSaluteBehaviour salute = new HostSaluteBehaviour(this);
-		setSalutes(salute);
-		this.addBehaviour(salute);		
+		HostSaluteBehaviour salute_behaviour = new HostSaluteBehaviour(this);
+		setSalutes(salute_behaviour);
+		this.addBehaviour(new HostMoveBehaviour(this));		
+		this.addBehaviour(new HostCreatorBehaviour(this));				
+		this.addBehaviour(salute_behaviour);		
 		
-		x =  y = 0;
+		x = y = 0;
 		
 		GraphicUtils.initialize();
 		setupImage();	
-		this.getContainerController();
 		
 		if (!DFServiceUtils.RegisterService(this, Constants.HOST_SERVICE, this.getLocalName())) {
 			System.err.println(this.getLocalName() + ": Couldn't register agent service. Killing agent...");
@@ -51,11 +46,11 @@ public class Host extends Agent {
 		int height = temporal_image.getIconHeight();
 		image.setSize(width, height);
 		image.setLocation(x, y);
-		image.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
 		GraphicUtils.addImage(image);
 	}
 	
-	public void move(int new_x, int new_y) {
+	public void setPos(int new_x, int new_y) {
 		x = new_x;
 		y = new_y;
 		image.setLocation(x, y);

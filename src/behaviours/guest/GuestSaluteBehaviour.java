@@ -37,6 +37,10 @@ public class GuestSaluteBehaviour extends TickerBehaviour{
 				myAgent.send(response);
 				System.out.println(myAgent.getLocalName() + " a " + sender + ": " + response.getContent());
 			}
+			else if (msg.getConversationId() == Constants.BEGIN_PARTY) {				
+				myAgent.addBehaviour(new GuestPartyBehaviour(myAgent));
+				stop();
+			}
 		}
 	}	
 

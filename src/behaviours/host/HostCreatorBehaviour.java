@@ -1,5 +1,7 @@
 package behaviours.host;
 
+import utils.Constants;
+import utils.DFServiceUtils;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.wrapper.AgentContainer;
@@ -34,7 +36,12 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 			}
 			break;
 		default:
-			this.stop();
+			DFServiceUtils.sendMsgToService(myAgent, "Que comience la fiesta", 
+					Constants.GUEST_SERVICE, Constants.BEGIN_PARTY);
+			System.out.println(myAgent.getLocalName() + ": Ya estamos todos!");
+			System.out.println(myAgent.getLocalName() + ": Podeis empezar a comer y beber!");
+			//TODO: Add host pary behaviour
+			stop();
 			break;
 		}
 		state++;

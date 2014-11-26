@@ -3,10 +3,8 @@ package agents;
 import graphics.GraphicUtils;
 import jade.core.Agent;
 
-import java.awt.Color;
 import java.awt.Image;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -28,8 +26,7 @@ public abstract class Guest extends Agent{
 			System.err.println(this.getLocalName() + ": Couldn't register agent service. Killing agent...");
 			this.doDelete();
 		}
-		GuestMoveBehaviour move_behaviour = new GuestMoveBehaviour(this);
-		this.addBehaviour(move_behaviour);
+		this.addBehaviour(new GuestMoveBehaviour(this));
 	}
 	
 	protected void setupImage(String file_name, double size) {
@@ -40,11 +37,10 @@ public abstract class Guest extends Agent{
 		int height = (int)(temporal_image.getIconHeight() * size);
 		Image img = temporal_image.getImage().getScaledInstance(width, height,
 	            Image.SCALE_DEFAULT);
-		image = new JLabel(new ImageIcon(img));
-		
+		image = new JLabel(new ImageIcon(img));		
 		image.setSize(image.getPreferredSize());
 		image.setLocation(x, y);
-		image.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+		
 		GraphicUtils.addImage(image);
 	}
 	
@@ -67,7 +63,8 @@ public abstract class Guest extends Agent{
 		return image.getWidth();
 	}
 	protected void takeDown() {
-		//TODO: Desregistrar el agente y borrar la imagen
+		//TODO: Desregistrar el agente
+		GraphicUtils.removeImage(image);
 	}
 	
 }

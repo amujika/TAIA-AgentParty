@@ -7,7 +7,8 @@ public class Constants {
 	
 	public static final String GREETING = "Greeting";
 	public static final String GREETING_ACK = "Greeting_ACK";
-	
+	public static final String BEGIN_PARTY = "Begin the party";
+	public static final String GOODBYE = "Goodbye";
 	public static final String LOCATION = "Location";
 	
 	public static final String HOST_SERVICE  = "party host";
