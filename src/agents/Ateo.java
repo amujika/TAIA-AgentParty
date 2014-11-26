@@ -21,9 +21,9 @@ public class Ateo extends Guest {
 	
 	protected void setSalutes(GuestSaluteBehaviour behaviour) {
 		behaviour.answers = new TreeMap<String, String>();
-		behaviour.default_answer = "";		
+		behaviour.default_answer = "Toma un panfleto anti-cristiano.";		
 		behaviour.host_salute = "¡Jódete Cheesus!";
-		behaviour.guest_salute = "";
+		behaviour.guest_salute = "Te veo cara de capistalista, ¡compra mis libros!";
 	}
 
 }

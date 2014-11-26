@@ -8,6 +8,8 @@ public class Constants {
 	public static final String GREETING = "Greeting";
 	public static final String GREETING_ACK = "Greeting_ACK";
 	
+	public static final String LOCATION = "Location";
+	
 	public static final String HOST_SERVICE  = "party host";
 	public static final String GUEST_SERVICE = "party guest";
 }

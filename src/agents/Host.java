@@ -1,15 +1,21 @@
 package agents;
 
+import graphics.GraphicUtils;
+import jade.core.Agent;
+
+import java.awt.Color;
+import java.util.TreeMap;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import utils.Constants;
 import utils.DFServiceUtils;
 import utils.Resources;
-import graphics.GraphicUtils;
 import behaviours.host.HostCreatorBehaviour;
 import behaviours.host.HostMoveBehaviour;
-import jade.core.Agent;
+import behaviours.host.HostSaluteBehaviour;
 
 public class Host extends Agent {	
 	private static final long serialVersionUID = 3493143872944535412L;
@@ -22,6 +28,9 @@ public class Host extends Agent {
 		this.addBehaviour(main_behaviour);
 		HostCreatorBehaviour creator_behaviour = new HostCreatorBehaviour(this);
 		this.addBehaviour(creator_behaviour);
+		HostSaluteBehaviour salute = new HostSaluteBehaviour(this);
+		setSalutes(salute);
+		this.addBehaviour(salute);		
 		
 		x =  y = 0;
 		
@@ -35,15 +44,14 @@ public class Host extends Agent {
 		}
 	}
 	
-	private void setupImage() {
-				
+	private void setupImage() {			
 		ImageIcon temporal_image = new ImageIcon(Resources.JESUS);
 		image = new JLabel(temporal_image);
 		int width  = temporal_image.getIconWidth();
 		int height = temporal_image.getIconHeight();
 		image.setSize(width, height);
 		image.setLocation(x, y);
-		
+		image.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		GraphicUtils.addImage(image);
 	}
 	
@@ -51,6 +59,12 @@ public class Host extends Agent {
 		x = new_x;
 		y = new_y;
 		image.setLocation(x, y);
+	}
+	
+	protected void setSalutes(HostSaluteBehaviour behaviour) {
+		behaviour.answers = new TreeMap<String, String>();
+		behaviour.default_answer = "Vendo droga... bendita.";
+		behaviour.answers.put("Ateo", "¡Vuelve al parque, Ateo!");
 	}
 	
 	protected void takeDown() {

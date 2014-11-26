@@ -3,8 +3,10 @@ package agents;
 import graphics.GraphicUtils;
 import jade.core.Agent;
 
+import java.awt.Color;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -42,6 +44,7 @@ public abstract class Guest extends Agent{
 		
 		image.setSize(image.getPreferredSize());
 		image.setLocation(x, y);
+		image.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		GraphicUtils.addImage(image);
 	}
 	
