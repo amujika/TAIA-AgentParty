@@ -12,7 +12,7 @@ public abstract class Waiter extends Agent{
 	
 	private static final long serialVersionUID = -261734589169928696L;
 	private Vector<String> food, drink;
-		
+	
 	protected void setup() {
 		if (!DFServiceUtils.RegisterService(this, Constants.WAITER_SERVICE, this.getLocalName())) {
 			System.err.println(this.getLocalName() + ": Couldn't register agent service. Killing agent...");
@@ -23,7 +23,10 @@ public abstract class Waiter extends Agent{
 		addFood();
 		addDrink();
 		
-		this.addBehaviour(new WaiterBehaviour(this));
+		WaiterBehaviour waiterBehaviour = new WaiterBehaviour(this);
+		setWaiterBehaviour(waiterBehaviour);
+		
+		this.addBehaviour(waiterBehaviour);
 	}
 
 	protected void takeDown() {
@@ -42,7 +45,11 @@ public abstract class Waiter extends Agent{
 		drink.addElement("Whisky");
 		drink.addElement("Suan de Cabras");
 		drink.addElement("Coca Cola");
-		drink.addElement("Leche de Soja");
+		drink.addElement("Lágrima de mariposa con Ron añejo");
+	}
+	
+	protected void setWaiterBehaviour(WaiterBehaviour behaviour){
+		
 	}
 	
 }
