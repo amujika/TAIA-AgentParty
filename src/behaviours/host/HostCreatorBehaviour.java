@@ -40,7 +40,7 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 					Constants.GUEST_SERVICE, Constants.BEGIN_PARTY);
 			System.out.println(myAgent.getLocalName() + ": Ya estamos todos!");
 			System.out.println(myAgent.getLocalName() + ": Podeis empezar a comer y beber!");
-			//TODO: Add host pary behaviour
+			//TODO: Add host party behaviour
 			stop();
 			break;
 		}
