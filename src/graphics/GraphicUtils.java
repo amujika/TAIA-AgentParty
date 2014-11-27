@@ -2,7 +2,6 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
@@ -10,7 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import utils.Constants;
 import utils.RandomUtils;
@@ -40,7 +43,7 @@ public class GraphicUtils {
 		textArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		textArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		textArea.setAutoscrolls(true);
-		JTextArea text = new JTextArea();
+		JTextPane text = new JTextPane();
 		text.setSize(Constants.WINDOW_WIDTH, Constants.TEXT_HEIGHT);
 		text.setEditable(false);
 		textArea.setViewportView(text);
@@ -61,17 +64,22 @@ public class GraphicUtils {
 	}
 	
 	public static void appendMessage(String msg) {
-		JTextArea text = (JTextArea) textArea.getViewport().getView();
+		JTextPane text = (JTextPane) textArea.getViewport().getView();
 		String sender = msg.split("\\s+")[0];
 		Color color;
 		if (!colors.containsKey(sender)) {
 			colors.put(sender, RandomUtils.randomColor());
 		} 
 		color = colors.get(sender);
-		String hexColor = String.format("#%06X", (0xFFFFFF & color.getRGB()));
-		text.append(" " + msg + "</span>\n");
+		StyledDocument doc = text.getStyledDocument();
+		Style style = doc.addStyle("Main", null); 
+		StyleConstants.setForeground(style, color); 
+		try {
+			doc.insertString(doc.getLength(), "  " + msg + "\n", style);
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
 		JScrollBar jsbar = textArea.getVerticalScrollBar();
 		jsbar.setValue(jsbar.getMaximum());
-		
 	}
 }
