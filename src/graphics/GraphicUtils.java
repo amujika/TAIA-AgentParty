@@ -18,9 +18,7 @@ public class GraphicUtils {
 		window = new JFrame();
 		window.setLayout(null);
 		window.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-		//window.setLocationRelativeTo(null);
-		//window.setLocation(0, -100);
-		
+		System.out.println("Adrian");
 		// MESSAGE WINDOW
 		msgWindow = new JFrame();
 		msgWindow.setLayout(null);
