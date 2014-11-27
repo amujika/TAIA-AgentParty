@@ -12,6 +12,8 @@ public class Constants {
 	public static final String BEGIN_PARTY = "Begin the party";
 	public static final String GOODBYE = "Goodbye";
 	public static final String LOCATION = "Location";
+	public static final String FOOD = "Food";
+	public static final String DRINK = "Drink";
 	
 	public static final String HOST_SERVICE  = "party host";
 	public static final String GUEST_SERVICE = "party guest";
