@@ -33,7 +33,7 @@ public class Host extends Agent {
 		GraphicUtils.initialize();
 		setupImage();	
 		
-		if (!DFServiceUtils.RegisterService(this, Constants.HOST_SERVICE, this.getLocalName())) {
+		if (!DFServiceUtils.registerService(this, Constants.HOST_SERVICE, this.getLocalName())) {
 			System.err.println(this.getLocalName() + ": Couldn't register agent service. Killing agent...");
 			this.doDelete();
 		}

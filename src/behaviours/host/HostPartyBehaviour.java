@@ -13,7 +13,7 @@ public class HostPartyBehaviour extends TickerBehaviour {
 	}
 
 	protected void onTick() {
-		// TODO Eat
+		//TODO: Eat
 		ACLMessage msg = myAgent.receive();
 		if (msg != null && msg.getConversationId() != null) {
 			if (msg.getConversationId() == Constants.FOOD) {

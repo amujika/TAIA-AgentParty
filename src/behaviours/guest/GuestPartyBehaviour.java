@@ -4,6 +4,7 @@ import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
 import utils.Constants;
+import utils.DFServiceUtils;
 import utils.RandomUtils;
 import agents.Guest;
 
@@ -17,6 +18,13 @@ public class GuestPartyBehaviour extends TickerBehaviour {
 	}
 
 	protected void onTick() {
+		if (myAgent.satisfaction <= 0) {
+			DFServiceUtils.sendMsgToService(myAgent, myAgent.parting_sentence, 
+			Constants.HOST_SERVICE, Constants.GOODBYE);
+			
+			
+			myAgent.doDelete();
+		}
 		ACLMessage msg = myAgent.receive();
 		if (msg != null && msg.getConversationId() != null) {
 			if (msg.getConversationId() == Constants.FOOD ||
@@ -27,10 +35,8 @@ public class GuestPartyBehaviour extends TickerBehaviour {
 					myAgent.addDrink(msg.getContent());
 				switch (RandomUtils.range(1, 2)) {
 				case 1:
-					System.out
-							.println(myAgent.getLocalName()
-									+ ": ¡Qué puta mierda de "
-									+ msg.getContent() + "!");
+					System.out.println(myAgent.getLocalName()
+					+ ": ¡Qué puta mierda de " + msg.getContent() + "!");
 					myAgent.satisfaction++;
 					break;
 				case 2:

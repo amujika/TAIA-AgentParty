@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import utils.Constants;
 import utils.DFServiceUtils;
 import behaviours.guest.GuestMoveBehaviour;
-import behaviours.guest.GuestPartyBehaviour;
 import behaviours.guest.GuestSaluteBehaviour;
 
 public abstract class Guest extends Agent {
@@ -22,11 +21,12 @@ public abstract class Guest extends Agent {
 	protected int x, y;
 	public Vector<String> food, drink;
 	public int satisfaction;
+	public String parting_sentence;
 
 	protected abstract void setSalutes(GuestSaluteBehaviour behaviour);
 
 	protected void setup() {
-		if (!DFServiceUtils.RegisterService(this, Constants.GUEST_SERVICE,
+		if (!DFServiceUtils.registerService(this, Constants.GUEST_SERVICE,
 				this.getLocalName())) {
 			System.err.println(this.getLocalName()
 					+ ": Couldn't register agent service. Killing agent...");
@@ -35,8 +35,9 @@ public abstract class Guest extends Agent {
 		food = new Vector<String>();
 		drink = new Vector<String>();
 
-		this.addBehaviour(new GuestMoveBehaviour(this));
-		this.addBehaviour(new GuestPartyBehaviour(this));
+		parting_sentence = "Chao!";
+		
+		this.addBehaviour(new GuestMoveBehaviour(this));		
 	}
 
 	protected void setupImage(String file_name, double size) {
@@ -77,7 +78,7 @@ public abstract class Guest extends Agent {
 	}
 
 	protected void takeDown() {
-		// TODO: Desregistrar el agente
+		DFServiceUtils.unregisterService(this);
 		GraphicUtils.removeImage(image);
 	}
 

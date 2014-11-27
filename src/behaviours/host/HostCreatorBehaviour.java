@@ -8,6 +8,7 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.StaleProxyException;
 import agents.Ateo;
 import agents.Banana;
+import agents.Waiter;
 
 public class HostCreatorBehaviour extends TickerBehaviour{
 	private static final long serialVersionUID = -1727329283961461036L;
@@ -36,10 +37,16 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 			}
 			break;
 		default:
-			DFServiceUtils.sendMsgToService(myAgent, "Que comience la fiesta", 
+			try {
+				container.createNewAgent("Waiter", Waiter.class.getName(), new Object[0]).start();
+			} catch (StaleProxyException e) {				
+				e.printStackTrace();
+			}
+			DFServiceUtils.sendMsgToService(myAgent, "Que comience la fiesta!", 
 					Constants.GUEST_SERVICE, Constants.BEGIN_PARTY);
 			System.out.println(myAgent.getLocalName() + ": Ya estamos todos!");
 			System.out.println(myAgent.getLocalName() + ": Podeis empezar a comer y beber!");
+			
 			//TODO: Add host party behaviour
 			stop();
 			break;

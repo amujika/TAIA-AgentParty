@@ -1,20 +1,27 @@
 package agents;
 
+import graphics.GraphicUtils;
 import jade.core.Agent;
 
+import java.awt.Image;
 import java.util.Vector;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import utils.Constants;
 import utils.DFServiceUtils;
+import utils.Resources;
 import behaviours.guest.WaiterBehaviour;
 
-public abstract class Waiter extends Agent{
+public class Waiter extends Agent{
 	
 	private static final long serialVersionUID = -261734589169928696L;
-	private Vector<String> food, drink;
+	public Vector<String> food, drink;
+	protected JLabel image;
 	
 	protected void setup() {
-		if (!DFServiceUtils.RegisterService(this, Constants.WAITER_SERVICE, this.getLocalName())) {
+		if (!DFServiceUtils.registerService(this, Constants.WAITER_SERVICE, this.getLocalName())) {
 			System.err.println(this.getLocalName() + ": Couldn't register agent service. Killing agent...");
 			this.doDelete();
 		}
@@ -22,15 +29,23 @@ public abstract class Waiter extends Agent{
 		drink = new Vector <String>();
 		addFood();
 		addDrink();
-		
-		WaiterBehaviour waiterBehaviour = new WaiterBehaviour(this);
-		setWaiterBehaviour(waiterBehaviour);
-		
-		this.addBehaviour(waiterBehaviour);
+		setupImage(Resources.WAITER, 1);
+		this.addBehaviour(new WaiterBehaviour(this));
 	}
+	
+	protected void setupImage(String file_name, double size) {
 
-	protected void takeDown() {
-		super.takeDown();
+		ImageIcon temporal_image = new ImageIcon(file_name);
+
+		int width = (int) (temporal_image.getIconWidth() * size);
+		int height = (int) (temporal_image.getIconHeight() * size);
+		Image img = temporal_image.getImage().getScaledInstance(width, height,
+				Image.SCALE_DEFAULT);
+		image = new JLabel(new ImageIcon(img));
+		image.setSize(image.getPreferredSize());
+		image.setLocation(0, 0);
+
+		GraphicUtils.addImage(image);
 	}
 	
 	private void addFood(){
@@ -46,10 +61,9 @@ public abstract class Waiter extends Agent{
 		drink.addElement("Suan de Cabras");
 		drink.addElement("Coca Cola");
 		drink.addElement("Lágrima de mariposa con Ron añejo");
-	}
+	}	
 	
-	protected void setWaiterBehaviour(WaiterBehaviour behaviour){
-		
+	protected void takeDown() {		
+		GraphicUtils.removeImage(image);
 	}
-	
 }
