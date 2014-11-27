@@ -17,4 +17,6 @@ public class Constants {
 	
 	public static final String HOST_SERVICE  = "party host";
 	public static final String GUEST_SERVICE = "party guest";
+	public static final String WAITER_SERVICE = "waiter offer";
+	
 }
