@@ -63,7 +63,18 @@ public class Waiter extends Agent{
 		drink.addElement("Lágrima de mariposa con Ron añejo");
 	}	
 	
-	protected void takeDown() {		
+	protected void takeDown() {	
+		StringBuilder temp = new StringBuilder();
+		temp.append(this.getLocalName() + " ha servido ");
+		for (int i = 0; i < drink.size(); ++i) {
+			food.add(drink.get(i));
+		}
+		for (int i = 0; i < food.size(); ++i) {
+			if (i != 0) temp.append(", ");
+			temp.append(food.get(i));
+		}		
+		temp.append(".");
+		GraphicUtils.appendMessage(temp.toString());
 		GraphicUtils.removeImage(image);
 	}
 }

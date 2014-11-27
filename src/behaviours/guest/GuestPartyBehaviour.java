@@ -1,8 +1,10 @@
 package behaviours.guest;
 
+import graphics.GraphicUtils;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import utils.Constants;
 import utils.DFServiceUtils;
 import utils.RandomUtils;
@@ -20,10 +22,10 @@ public class GuestPartyBehaviour extends TickerBehaviour {
 	protected void onTick() {
 		if (myAgent.satisfaction <= 0) {
 			DFServiceUtils.sendMsgToService(myAgent, myAgent.parting_sentence, 
-			Constants.HOST_SERVICE, Constants.GOODBYE);
-			
-			
+					Constants.HOST_SERVICE, Constants.GOODBYE);
+			myAgent.blockingReceive(MessageTemplate.MatchConversationId(Constants.GOODBYE_ACK));
 			myAgent.doDelete();
+			return;
 		}
 		ACLMessage msg = myAgent.receive();
 		if (msg != null && msg.getConversationId() != null) {
@@ -33,14 +35,14 @@ public class GuestPartyBehaviour extends TickerBehaviour {
 					myAgent.addFood(msg.getContent());
 				else
 					myAgent.addDrink(msg.getContent());
-				switch (RandomUtils.range(1, 2)) {
+				switch (RandomUtils.range(1, 5)) {
 				case 1:
-					System.out.println(myAgent.getLocalName()
+					GraphicUtils.appendMessage(myAgent.getLocalName()
 					+ ": ¡Qué puta mierda de " + msg.getContent() + "!");
 					myAgent.satisfaction++;
 					break;
-				case 2:
-					System.out.println(myAgent.getLocalName() + ": Ummm... "
+				default:
+					GraphicUtils.appendMessage(myAgent.getLocalName() + ": Ummm... "
 							+ msg.getContent() + ", bastante bien.");
 					myAgent.satisfaction -= 2;
 					break;

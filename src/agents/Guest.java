@@ -19,7 +19,7 @@ public abstract class Guest extends Agent {
 
 	protected JLabel image;
 	protected int x, y;
-	public Vector<String> food, drink;
+	private Vector<String> food, drink;
 	public int satisfaction;
 	public String parting_sentence;
 
@@ -36,7 +36,7 @@ public abstract class Guest extends Agent {
 		drink = new Vector<String>();
 
 		parting_sentence = "Chao!";
-		
+		satisfaction = 3;
 		this.addBehaviour(new GuestMoveBehaviour(this));		
 	}
 
@@ -78,6 +78,31 @@ public abstract class Guest extends Agent {
 	}
 
 	protected void takeDown() {
+		if (food.size() == 0) {
+			GraphicUtils.appendMessage(this.getLocalName() + " no ha comido nada.");
+		}else {
+			StringBuilder temp = new StringBuilder();
+			temp.append(this.getLocalName() + " ha comido ");
+			for (int i = 0; i < food.size(); ++i) {
+				if (i != 0) temp.append(", ");
+				temp.append(food.get(i));
+			}
+			temp.append(".");
+			GraphicUtils.appendMessage(temp.toString());
+		}
+		if (drink.size() == 0) {
+			GraphicUtils.appendMessage(this.getLocalName() + " no ha bebido nada.");
+		}else {
+			StringBuilder temp = new StringBuilder();
+			temp.append(this.getLocalName() + " ha bebido ");
+			for (int i = 0; i < drink.size(); ++i) {
+				if (i != 0) temp.append(", ");
+				temp.append(drink.get(i));
+			}
+			temp.append(".");
+			GraphicUtils.appendMessage(temp.toString());
+		}
+		
 		DFServiceUtils.unregisterService(this);
 		GraphicUtils.removeImage(image);
 	}

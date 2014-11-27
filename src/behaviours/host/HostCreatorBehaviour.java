@@ -1,22 +1,25 @@
 package behaviours.host;
 
+import graphics.GraphicUtils;
 import utils.Constants;
 import utils.DFServiceUtils;
-import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.StaleProxyException;
 import agents.Ateo;
 import agents.Banana;
+import agents.Host;
 import agents.Waiter;
 
 public class HostCreatorBehaviour extends TickerBehaviour{
 	private static final long serialVersionUID = -1727329283961461036L;
 	
 	private int state = 0;
+	Host myAgent;
 	
-	public HostCreatorBehaviour(Agent a) {
-		super(a, 1500);		
+	public HostCreatorBehaviour(Host a) {
+		super(a, 1500);
+		myAgent = a;
 	}
 
 	protected void onTick() {
@@ -44,10 +47,11 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 			}
 			DFServiceUtils.sendMsgToService(myAgent, "Que comience la fiesta!", 
 					Constants.GUEST_SERVICE, Constants.BEGIN_PARTY);
-			System.out.println(myAgent.getLocalName() + ": Ya estamos todos!");
-			System.out.println(myAgent.getLocalName() + ": Podeis empezar a comer y beber!");
+			GraphicUtils.appendMessage(myAgent.getLocalName() + ": Ya estamos todos!");
+			GraphicUtils.appendMessage(myAgent.getLocalName() + ": Podeis empezar a comer y beber!");
 			
-			//TODO: Add host party behaviour
+			myAgent.addBehaviour(new HostPartyBehaviour(myAgent));
+			myAgent.party = true;
 			stop();
 			break;
 		}

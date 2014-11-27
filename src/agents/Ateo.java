@@ -17,7 +17,6 @@ public class Ateo extends Guest {
 		GuestSaluteBehaviour salute = new GuestSaluteBehaviour(this);
 		setSalutes(salute);
 		this.addBehaviour(salute);
-		satisfaction = 5;
 	}
 	
 	protected void setSalutes(GuestSaluteBehaviour behaviour) {

@@ -1,5 +1,6 @@
 package utils;
 
+import graphics.GraphicUtils;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -51,7 +52,7 @@ public class DFServiceUtils {
 				reply.setContent(content);
 				reply.setConversationId(conversation);
 				sender.send(reply);
-				System.out.println(sender.getLocalName() + " a " + guest.getName().getLocalName() + ": " + reply.getContent());
+				GraphicUtils.appendMessage(sender.getLocalName() + " a " + guest.getName().getLocalName() + ": " + reply.getContent());
 			}
 		} catch (FIPAException e1) {
 			e1.printStackTrace();
@@ -75,7 +76,7 @@ public class DFServiceUtils {
 			reply.setContent(content);
 			reply.setConversationId(conversation);
 			sender.send(reply);
-			System.out.println(sender.getLocalName() + " a " + guest.getName().getLocalName() + ": " + reply.getContent());
+			GraphicUtils.appendMessage(sender.getLocalName() + " a " + guest.getName().getLocalName() + ": ¿Quieres " + reply.getContent() + "?");
 		} catch (FIPAException e1) {
 			e1.printStackTrace();
 			return false;

@@ -1,11 +1,12 @@
 package behaviours.host;
 
-import jade.core.Agent;
+import graphics.GraphicUtils;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
 import java.util.TreeMap;
 
+import agents.Host;
 import utils.Constants;
 
 public class HostSaluteBehaviour extends CyclicBehaviour {
@@ -15,12 +16,17 @@ public class HostSaluteBehaviour extends CyclicBehaviour {
 	public String default_answer;
 	public TreeMap<String, String> answers;	
 	
-	public HostSaluteBehaviour(Agent a) {
+	private Host myAgent;
+	
+	public HostSaluteBehaviour(Host a) {
 		super(a);
+		myAgent = a;
 	}
 	
-	@Override
 	public void action() {
+		if(myAgent.party) {
+			myAgent.removeBehaviour(this);
+		}
 		ACLMessage msg = myAgent.receive();
 		if(msg != null && msg.getConversationId() != null) {
 			if(msg.getConversationId().compareTo(Constants.GREETING) == 0) {
@@ -34,7 +40,7 @@ public class HostSaluteBehaviour extends CyclicBehaviour {
 					response.setContent(default_answer);
 				}
 				myAgent.send(response);
-				System.out.println(myAgent.getLocalName() + " a " + sender + ": " + response.getContent());
+				GraphicUtils.appendMessage(myAgent.getLocalName() + " a " + sender + ": " + response.getContent());
 			}
 		}
 	}

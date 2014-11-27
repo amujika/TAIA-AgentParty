@@ -20,6 +20,7 @@ public class Host extends Agent {
 	
 	private JLabel image;
 	protected int x, y;
+	public boolean party = false; 
 	
 	protected void setup() {
 		HostSaluteBehaviour salute_behaviour = new HostSaluteBehaviour(this);

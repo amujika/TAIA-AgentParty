@@ -1,5 +1,7 @@
 package behaviours.guest;
 
+import graphics.GraphicUtils;
+
 import java.util.TreeMap;
 
 import utils.Constants;
@@ -35,7 +37,7 @@ public class GuestSaluteBehaviour extends TickerBehaviour{
 					response.setContent(default_answer);
 				}
 				myAgent.send(response);
-				System.out.println(myAgent.getLocalName() + " a " + sender + ": " + response.getContent());
+				GraphicUtils.appendMessage(myAgent.getLocalName() + " a " + sender + ": " + response.getContent());
 			}
 			else if (msg.getConversationId() == Constants.BEGIN_PARTY) {				
 				myAgent.addBehaviour(new GuestPartyBehaviour(myAgent));
