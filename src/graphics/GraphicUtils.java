@@ -5,6 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import utils.Constants;
 import utils.Resources;
@@ -22,11 +23,16 @@ public class GraphicUtils {
 		// MESSAGE WINDOW
 		msgWindow = new JFrame();
 		msgWindow.setLayout(null);
-		msgWindow.setSize(Constants.WINDOW_WIDTH, 200);
+		msgWindow.setSize(Constants.MSG_WINDOW_WIDTH, 
+						  Constants.MSG_WINDOW_HEIGHT);
 		msgWindow.setLocationRelativeTo(window);
 		msgWindow.setLocation(0, Constants.WINDOW_HEIGHT + 60);
-		JLabel msg = new JLabel();
-		msg.setText("Hola");
+		JTextArea msg = new JTextArea();
+		msg.setEditable(false);
+		msg.setLocation(10, 10);
+		msg.setSize(Constants.MSG_WINDOW_WIDTH, 
+					Constants.MSG_WINDOW_HEIGHT);
+		msg.setText("Hola\nHola\nHola");
 		msgWindow.add(msg);
 		
 		ImageIcon backgroundImage = new ImageIcon(Resources.BACKGROUND);	

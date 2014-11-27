@@ -2,7 +2,9 @@ package utils;
 
 public class Constants {
 	public static final int WINDOW_WIDTH  = 1000;
-	public static final int WINDOW_HEIGHT = 700;	
+	public static final int WINDOW_HEIGHT = 700;
+	public static final int MSG_WINDOW_WIDTH  = 990;
+	public static final int MSG_WINDOW_HEIGHT = 190;	
 	public static final int REFRESH_TIME  = 30;
 	
 	public static final String GREETING = "Greeting";
