@@ -62,7 +62,7 @@ public class Host extends Agent {
 	
 	protected void setSalutes(HostSaluteBehaviour behaviour) {
 		behaviour.answers = new TreeMap<String, String>();
-		behaviour.default_answer = "Vendo droga... bendita.";
+		behaviour.default_answer = "¡Bienvenidos a la última fiesta!";
 		behaviour.answers.put("Ateo", "¡Vuelve al parque, Ateo!");
 	}
 	

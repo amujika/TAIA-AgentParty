@@ -10,15 +10,15 @@ public class NyanCat extends Guest{
 	private static final long serialVersionUID = -812750831522086258L;
 
 	protected void setup() {
-		x = 200;
-		y = 200;
+		x = 150;
+		y = 400;
 		super.setupImage(Resources.NYAN, 0.5);
 		super.setup();
 
 		GuestSaluteBehaviour salute = new GuestSaluteBehaviour(this);
 		setSalutes(salute);
 		this.addBehaviour(salute);
-		//Audio.addSound(Resources.BANANA_SOUND);
+		Audio.addSound(Resources.NYAN_SOUND);
 	}
 
 	protected void setSalutes(GuestSaluteBehaviour behaviour) {
@@ -26,10 +26,11 @@ public class NyanCat extends Guest{
 		behaviour.default_answer = "Nyan!";
 		behaviour.host_salute = "Nyan Nyan!";
 		behaviour.guest_salute = "Nyan Nyan Nyan";
+		this.parting_sentence = "Nyan!!";
 	}
 
 	protected void takeDown() {
-		//Audio.removeSound(Resources.BANANA_SOUND);
+		Audio.removeSound(Resources.NYAN_SOUND);
 		super.takeDown();
 	}
 }

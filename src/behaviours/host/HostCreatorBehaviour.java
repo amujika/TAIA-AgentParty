@@ -6,11 +6,7 @@ import utils.DFServiceUtils;
 import jade.core.behaviours.TickerBehaviour;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.StaleProxyException;
-import agents.Ateo;
-import agents.Banana;
-import agents.Host;
-import agents.NyanCat;
-import agents.Waiter;
+import agents.*;
 
 public class HostCreatorBehaviour extends TickerBehaviour{
 	private static final long serialVersionUID = -1727329283961461036L;
@@ -30,11 +26,17 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 			case 0:
 				container.createNewAgent("Banana", Banana.class.getName(), new Object[0]).start();
 				break;
-			case 1:			
+			case 1:
+				container.createNewAgent("Jim", Jim.class.getName(), new Object[0]).start();
+				break;
+			case 2:			
 				container.createNewAgent("Ateo", Ateo.class.getName(), new Object[0]).start();
 				break;
-			case 2:
+			case 3:
 				container.createNewAgent("NyanCat", NyanCat.class.getName(), new Object[0]).start();
+				break;
+			case 4:
+				container.createNewAgent("Hal 9000", Hal.class.getName(), new Object[0]).start();
 				break;
 			default:
 				container.createNewAgent("Waiter", Waiter.class.getName(), new Object[0]).start();

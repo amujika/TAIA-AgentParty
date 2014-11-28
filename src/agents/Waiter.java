@@ -53,7 +53,7 @@ public class Waiter extends Agent{
 	private void addFood(){
 		food.addElement("Chorizo");
 		food.addElement("Salchichon");
-		food.addElement("Hostia");
+		food.addElement("Hostia bendita");
 		food.addElement("Garbanzos");
 		food.addElement("Protes");
 	}
@@ -62,7 +62,7 @@ public class Waiter extends Agent{
 		drink.addElement("Whisky");
 		drink.addElement("Suan de Cabras");
 		drink.addElement("Coca Cola");
-		drink.addElement("Lágrima de mariposa con Ron añejo");
+		drink.addElement("Vino aguado");
 	}	
 	
 	protected void takeDown() {	

@@ -27,7 +27,7 @@ public class HostPartyBehaviour extends CyclicBehaviour {
 				reply.setConversationId(Constants.GOODBYE_ACK);
 				reply.setContent("Adios " + msg.getSender().getLocalName() + ".");
 				myAgent.send(reply);
-				GraphicUtils.appendMessage(myAgent.getLocalName() + " a " + msg.getSender().getLocalName() + ": " + msg.getContent());
+				GraphicUtils.appendMessage(myAgent.getLocalName() + " a " + msg.getSender().getLocalName() + ": Adios!");
 			}else {
 				GraphicUtils.appendMessage("WTF!");
 			}

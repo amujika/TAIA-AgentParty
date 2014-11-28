@@ -10,7 +10,7 @@ import agents.Waiter;
 public class WaiterBehaviour extends TickerBehaviour {
 	
 	private Waiter myAgent;
-	private boolean f_or_d;
+	private int f_or_d;
 	
 	private static final long serialVersionUID = 8721067307502937591L;
 	
@@ -18,7 +18,7 @@ public class WaiterBehaviour extends TickerBehaviour {
 	public WaiterBehaviour(Waiter a) {
 		super(a, 1500);
 		myAgent = a;
-		f_or_d = true;
+		f_or_d = 0;
 	}
 
 	protected void onTick() {
@@ -28,14 +28,21 @@ public class WaiterBehaviour extends TickerBehaviour {
 		
 		String food = myAgent.food.get(RandomUtils.range(0, myAgent.food.size() - 1));
 		String drink = myAgent.drink.get(RandomUtils.range(0, myAgent.drink.size() - 1));
-		if (f_or_d) {
+		switch (f_or_d) {
+		case 0:
 			if(!DFServiceUtils.sendRandomMsg(myAgent, food, Constants.FOOD))
 				myAgent.doDelete();
-		} else {
+			break;
+		case 1:
 			if(!DFServiceUtils.sendRandomMsg(myAgent, drink, Constants.DRINK))
 				myAgent.doDelete();
+			break;
+		case 2:
+			DFServiceUtils.sendMsgToService(myAgent, "Quieres " + food + "?", 
+					Constants.HOST_SERVICE, Constants.FOOD, ACLMessage.REJECT_PROPOSAL);
+			break;
 		}
-		f_or_d = !f_or_d;
+		f_or_d = (f_or_d + 1) % 3;
 	}
 
 }

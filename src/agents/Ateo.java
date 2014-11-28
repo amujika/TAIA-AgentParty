@@ -10,7 +10,7 @@ public class Ateo extends Guest {
 	
 	protected void setup() {
 		x = 200;
-		y = 200;
+		y = 500;
 		super.setupImage(Resources.ATEO, 0.5);
 		super.setup();
 		
@@ -22,8 +22,9 @@ public class Ateo extends Guest {
 	protected void setSalutes(GuestSaluteBehaviour behaviour) {
 		behaviour.answers = new TreeMap<String, String>();
 		behaviour.default_answer = "Toma un panfleto anti-cristiano.";		
-		behaviour.host_salute = "¡Jódete Cheesus!";
+		behaviour.host_salute = "¡Jódete Jesus!";
 		behaviour.guest_salute = "Te veo cara de capistalista, ¡compra mis libros!";
+		this.parting_sentence = "Tu fiesta es horrible, me piro!";
 	}
 
 }
