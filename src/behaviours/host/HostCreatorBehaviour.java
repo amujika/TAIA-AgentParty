@@ -9,6 +9,7 @@ import jade.wrapper.StaleProxyException;
 import agents.Ateo;
 import agents.Banana;
 import agents.Host;
+import agents.NyanCat;
 import agents.Waiter;
 
 public class HostCreatorBehaviour extends TickerBehaviour{
@@ -24,36 +25,32 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 
 	protected void onTick() {
 		AgentContainer container = this.myAgent.getContainerController();
+		try {
 		switch (state) {
-		case 0:
-			try {
+			case 0:
 				container.createNewAgent("Banana", Banana.class.getName(), new Object[0]).start();
-			} catch (StaleProxyException e) {				
-				e.printStackTrace();
-			}
-			break;
-		case 1:
-			try {
+				break;
+			case 1:			
 				container.createNewAgent("Ateo", Ateo.class.getName(), new Object[0]).start();
-			} catch (StaleProxyException e) {				
-				e.printStackTrace();
-			}
-			break;
-		default:
-			try {
+				break;
+			case 2:
+				container.createNewAgent("NyanCat", NyanCat.class.getName(), new Object[0]).start();
+				break;
+			default:
 				container.createNewAgent("Waiter", Waiter.class.getName(), new Object[0]).start();
-			} catch (StaleProxyException e) {				
-				e.printStackTrace();
+				
+				DFServiceUtils.sendMsgToService(myAgent, "Que comience la fiesta!", 
+						Constants.GUEST_SERVICE, Constants.BEGIN_PARTY);
+				GraphicUtils.appendMessage(myAgent.getLocalName() + ": Ya estamos todos!");
+				GraphicUtils.appendMessage(myAgent.getLocalName() + ": Podeis empezar a comer y beber!");
+				
+				myAgent.addBehaviour(new HostPartyBehaviour(myAgent));
+				myAgent.party = true;
+				stop();
+				break;
 			}
-			DFServiceUtils.sendMsgToService(myAgent, "Que comience la fiesta!", 
-					Constants.GUEST_SERVICE, Constants.BEGIN_PARTY);
-			GraphicUtils.appendMessage(myAgent.getLocalName() + ": Ya estamos todos!");
-			GraphicUtils.appendMessage(myAgent.getLocalName() + ": Podeis empezar a comer y beber!");
-			
-			myAgent.addBehaviour(new HostPartyBehaviour(myAgent));
-			myAgent.party = true;
-			stop();
-			break;
+		} catch (StaleProxyException e) {				
+			e.printStackTrace();
 		}
 		state++;
 	}

@@ -4,7 +4,7 @@ public class Constants {
 	public static final int WINDOW_WIDTH  = 1000;
 	public static final int WINDOW_HEIGHT = 700;
 	public static final int TEXT_HEIGHT = 200;
-	public static final int REFRESH_TIME  = 30;
+	public static final int REFRESH_TIME  = 150;
 	
 	public static final String GREETING = "Greeting";
 	public static final String GREETING_ACK = "Greeting_ACK";
