@@ -1,6 +1,5 @@
 package behaviours.guest;
 
-import graphics.GraphicUtils;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -30,21 +29,21 @@ public class GuestPartyBehaviour extends TickerBehaviour {
 		ACLMessage msg = myAgent.receive();
 		if (msg != null && msg.getConversationId() != null) {
 			if (msg.getConversationId() == Constants.FOOD ||
-					msg.getConversationId() == Constants.DRINK) {
-				if(msg.getConversationId() == Constants.FOOD)
-					myAgent.addFood(msg.getContent());
-				else
-					myAgent.addDrink(msg.getContent());
-				switch (RandomUtils.range(1, 5)) {
+					msg.getConversationId() == Constants.DRINK) {				
+				switch (RandomUtils.range(1, 3)) {
 				case 1:
-					GraphicUtils.appendMessage(myAgent.getLocalName()
-					+ ": ¡Qué puta mierda de " + msg.getContent() + "!");
-					myAgent.satisfaction++;
+					DFServiceUtils.sendMsgToService(myAgent, "No gracias", 
+							Constants.WAITER_SERVICE, msg.getContent(), ACLMessage.REJECT_PROPOSAL);
 					break;
 				default:
-					GraphicUtils.appendMessage(myAgent.getLocalName() + ": Ummm... "
-							+ msg.getContent() + ", bastante bien.");
-					myAgent.satisfaction -= 2;
+					DFServiceUtils.sendMsgToService(myAgent, "Por supuesto!", 
+							Constants.WAITER_SERVICE, msg.getContent(), ACLMessage.ACCEPT_PROPOSAL);
+					myAgent.satisfaction--;
+					
+					if(msg.getConversationId() == Constants.FOOD)
+						myAgent.addFood(msg.getContent());
+					else
+						myAgent.addDrink(msg.getContent());
 					break;
 				}
 			}

@@ -3,6 +3,7 @@ package agents;
 import java.util.TreeMap;
 
 import behaviours.guest.GuestSaluteBehaviour;
+import utils.AudioPlayer;
 import utils.Resources;
 
 public class Banana extends Guest{
@@ -17,6 +18,8 @@ public class Banana extends Guest{
 		GuestSaluteBehaviour salute = new GuestSaluteBehaviour(this);
 		setSalutes(salute);
 		this.addBehaviour(salute);
+		sound = new AudioPlayer(Resources.BANANA_SOUND);
+		sound.startSound();
 	}
 	
 	protected void setSalutes(GuestSaluteBehaviour behaviour) {
@@ -24,6 +27,11 @@ public class Banana extends Guest{
 		behaviour.default_answer = "Bananhola!";		
 		behaviour.host_salute = "Que pasa Cheesus!";
 		behaviour.guest_salute = "Saludos bananatásticos";
+	}
+	
+	protected void takeDown() {
+		sound.pauseSound();
+		super.takeDown();
 	}
 
 }

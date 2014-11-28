@@ -36,8 +36,11 @@ public class DFServiceUtils {
 		return true;
 	}
 	
+	public static boolean sendMsgToService(Agent sender, String content,String service, String conversation) {
+		return sendMsgToService(sender, content, service, conversation, ACLMessage.INFORM);
+	}
 	
-	public static boolean sendMsgToService(Agent sender, String content,String service, String conversation) {		
+	public static boolean sendMsgToService(Agent sender, String content,String service, String conversation, int performative) {		
 		DFAgentDescription template = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();
 		sd.setType(service);
@@ -47,7 +50,7 @@ public class DFServiceUtils {
 			DFAgentDescription[] guests = DFService.search(sender, template);
 			for (DFAgentDescription guest: guests) {
 				if (guest.getName().equals(sender.getAID())) continue;
-				ACLMessage reply = new ACLMessage(ACLMessage.INFORM);
+				ACLMessage reply = new ACLMessage(performative);
 				reply.addReceiver(guest.getName());
 				reply.setContent(content);
 				reply.setConversationId(conversation);
@@ -76,7 +79,7 @@ public class DFServiceUtils {
 			reply.setContent(content);
 			reply.setConversationId(conversation);
 			sender.send(reply);
-			GraphicUtils.appendMessage(sender.getLocalName() + " a " + guest.getName().getLocalName() + ": ¿Quieres " + reply.getContent() + "?");
+			GraphicUtils.appendMessage(sender.getLocalName() + " a " + guest.getName().getLocalName() + ": ¿Quieres " + reply.getContent() + "?");			
 		} catch (FIPAException e1) {
 			e1.printStackTrace();
 			return false;

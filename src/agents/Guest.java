@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import utils.AudioPlayer;
 import utils.Constants;
 import utils.DFServiceUtils;
 import behaviours.guest.GuestMoveBehaviour;
@@ -22,6 +23,7 @@ public abstract class Guest extends Agent {
 	private Vector<String> food, drink;
 	public int satisfaction;
 	public String parting_sentence;
+	protected AudioPlayer sound;
 
 	protected abstract void setSalutes(GuestSaluteBehaviour behaviour);
 
@@ -34,10 +36,10 @@ public abstract class Guest extends Agent {
 		}
 		food = new Vector<String>();
 		drink = new Vector<String>();
-
+		
 		parting_sentence = "Chao!";
 		satisfaction = 3;
-		this.addBehaviour(new GuestMoveBehaviour(this));		
+		this.addBehaviour(new GuestMoveBehaviour(this));
 	}
 
 	protected void setupImage(String file_name, double size) {

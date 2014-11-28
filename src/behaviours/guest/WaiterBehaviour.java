@@ -1,6 +1,7 @@
 package behaviours.guest;
 
 import jade.core.behaviours.TickerBehaviour;
+import jade.lang.acl.ACLMessage;
 import utils.Constants;
 import utils.DFServiceUtils;
 import utils.RandomUtils;
@@ -21,6 +22,10 @@ public class WaiterBehaviour extends TickerBehaviour {
 	}
 
 	protected void onTick() {
+		ACLMessage msg = myAgent.receive();
+		if (msg != null && msg.getPerformative() == ACLMessage.ACCEPT_PROPOSAL)
+			myAgent.served.add(msg.getConversationId());
+		
 		String food = myAgent.food.get(RandomUtils.range(0, myAgent.food.size() - 1));
 		String drink = myAgent.drink.get(RandomUtils.range(0, myAgent.drink.size() - 1));
 		if (f_or_d) {

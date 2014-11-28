@@ -18,7 +18,7 @@ public class HostCreatorBehaviour extends TickerBehaviour{
 	Host myAgent;
 	
 	public HostCreatorBehaviour(Host a) {
-		super(a, 1500);
+		super(a, 3000);
 		myAgent = a;
 	}
 

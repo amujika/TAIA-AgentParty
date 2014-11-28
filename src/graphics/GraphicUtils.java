@@ -65,7 +65,7 @@ public class GraphicUtils {
 	
 	public static void appendMessage(String msg) {
 		JTextPane text = (JTextPane) textArea.getViewport().getView();
-		String sender = msg.split("\\s+")[0];
+		String sender = msg.split("[\\s+:]")[0];
 		Color color;
 		if (!colors.containsKey(sender)) {
 			colors.put(sender, RandomUtils.randomColor());

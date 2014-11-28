@@ -17,7 +17,7 @@ import behaviours.guest.WaiterBehaviour;
 public class Waiter extends Agent{
 	
 	private static final long serialVersionUID = -261734589169928696L;
-	public Vector<String> food, drink;
+	public Vector<String> food, drink, served;
 	protected JLabel image;
 	
 	protected void setup() {
@@ -27,9 +27,11 @@ public class Waiter extends Agent{
 		}
 		food = new Vector <String>();
 		drink = new Vector <String>();
+		served  = new Vector <String>();
 		addFood();
 		addDrink();
 		setupImage(Resources.WAITER, 1);
+		
 		this.addBehaviour(new WaiterBehaviour(this));
 	}
 	
@@ -66,15 +68,13 @@ public class Waiter extends Agent{
 	protected void takeDown() {	
 		StringBuilder temp = new StringBuilder();
 		temp.append(this.getLocalName() + " ha servido ");
-		for (int i = 0; i < drink.size(); ++i) {
-			food.add(drink.get(i));
-		}
-		for (int i = 0; i < food.size(); ++i) {
+		for (int i = 0; i < served.size(); ++i) {
 			if (i != 0) temp.append(", ");
-			temp.append(food.get(i));
+			temp.append(served.get(i));
 		}		
 		temp.append(".");
 		GraphicUtils.appendMessage(temp.toString());
+		DFServiceUtils.unregisterService(this);
 		GraphicUtils.removeImage(image);
 	}
 }

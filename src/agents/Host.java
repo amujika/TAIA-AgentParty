@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import utils.AudioPlayer;
 import utils.Constants;
 import utils.DFServiceUtils;
 import utils.Resources;
@@ -20,7 +21,9 @@ public class Host extends Agent {
 	
 	private JLabel image;
 	protected int x, y;
-	public boolean party = false; 
+	public boolean party = false;
+
+	private AudioPlayer sound; 
 	
 	protected void setup() {
 		HostSaluteBehaviour salute_behaviour = new HostSaluteBehaviour(this);
